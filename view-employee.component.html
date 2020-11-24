@@ -1,0 +1,20 @@
+<p>view-employee works!</p>
+<div class= "row">
+    <h3>{{pageHeader}}</h3>
+    <h4>ID  : {{employeeId}}</h4>
+  <h4>Name  : {{Name}} </h4>
+  <h4>Salary: {{salary}}</h4>
+    Permanent <input type="checkbox" [(ngModel)]= "IsPermanent"/>
+    
+  <p *ngIf ="IsPermanent">
+   Permanent: yes </p>
+  <p *ngIf ="!IsPermanent">
+    Permanent: no </p>
+    <h4>Department Id   : {{DepartmentId }}</h4>
+    <h4>Department Name :  {{DepartmentName}}</h4>
+    <h3> Skill id & Skill name</h3>
+  </div>
+
+    <div *ngFor= "let empl of empl.skill">
+        {{empl.skill_id}} - {{empl.skill_name}}
+        </div>

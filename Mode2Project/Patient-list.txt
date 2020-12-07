@@ -1,0 +1,53 @@
+Patient-list.html
+
+< h3   style = " color:saddlebrown " > Patient List </ h3 >
+< div >
+     < table   class = "table table-striped" >
+         < thead >
+                 < tr >
+                     < th > Patient ID </ th >
+                     < th > Patient FirstName </ th >
+                     < th > Patient LastName </ th >
+                 </ tr >
+         </ thead >
+         < tbody >
+             < tr   *ngFor = "let patient of patients | async" >
+                 < td > {?????{?????patient.id}?????}????? </ td >
+                 < td > {?????{?????patient.firstName}?????}????? </ td >
+                 < td > {?????{?????patient.lastName}?????}????? </ td >
+             </ tr >
+         </ tbody >
+     </ table >
+</ div >
+< button   class  =  "btn btn-primary active"   (click) = "btnClick()" > Back </ button >
+ 
+
+Patient-list.ts
+
+import  {?????  Component ,  OnInit  }?????  from   '@angular/core' ;
+import  {?????  Patient  }?????  from   '../patient' ;
+import  {?????  Observable  }?????  from   'rxjs' ;
+import  {?????  PatientService  }?????  from   '../patient.service' ;
+import  {?????  Router  }?????  from   '@angular/router' ;
+ 
+@ Component ({?????
+   selector :   'app-patient-history' ,
+   templateUrl :   './patient-history.component.html' ,
+   styleUrls :  [ './patient-history.component.css' ]
+}?????)
+export   class   PatientHistoryComponent   implements   OnInit  {?????
+   patients  :  Observable < Patient []>
+   constructor ( private   patientService : PatientService , private   router : Router ) {????? }?????
+ 
+   ngOnInit ():  void  {?????
+     this . reloadData ();
+  }?????
+   reloadData (){?????
+     this . patients = this . patientService . getPatientsList ();
+     console . log ( this . patients );  
+}?????
+btnClick (){?????
+   this . router . navigateByUrl ( 'ItemsAdmin' );
+}????? 
+ 
+}?????

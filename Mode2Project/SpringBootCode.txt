@@ -1,0 +1,623 @@
+EnrollPatient.java
+
+package com.pack.SpringBootJPA.model;
+
+
+import java.util.Date;
+ 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+ 
+@Entity
+@Table(name = "patients")
+public class EnrollPatient {????
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+    private String firstName;
+    private String lastName;
+    private String password;
+    private Date dob;
+    private String email;
+    private Long contactNumber;
+    private String state;
+    private boolean insurancePlan;
+ 
+    public EnrollPatient() {????
+        super();
+    }????
+ 
+    public EnrollPatient(String firstName, String lastName, String password, Date dob, String email, Long contactNumber,
+            String state, boolean insurancePlan) {????
+        super();
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.dob = dob;
+        this.email = email;
+        this.contactNumber = contactNumber;
+        this.state = state;
+        this.insurancePlan = insurancePlan;
+    }????
+ 
+    public long getId() {????
+        return id;
+    }????
+ 
+    public void setId(long id) {????
+        this.id = id;
+    }????
+ 
+    public String getFirstName() {????
+        return firstName;
+    }????
+ 
+    public void setFirstName(String firstName) {????
+        this.firstName = firstName;
+    }????
+ 
+    public String getLastName() {????
+        return lastName;
+    }????
+ 
+    public void setLastName(String lastName) {????
+        this.lastName = lastName;
+    }????
+ 
+    public String getPassword() {????
+        return password;
+    }????
+ 
+    public void setPassword(String password) {????
+        this.password = password;
+    }????
+ 
+    public Date getDob() {????
+        return dob;
+    }????
+ 
+    public void setDob(Date dob) {????
+        this.dob = dob;
+    }????
+ 
+    public String getEmail() {????
+        return email;
+    }????
+ 
+    public void setEmail(String email) {????
+        this.email = email;
+    }????
+ 
+    public Long getContactNumber() {????
+        return contactNumber;
+    }????
+ 
+    public void setContactNumber(Long contactNumber) {????
+        this.contactNumber = contactNumber;
+    }????
+ 
+    public String getState() {????
+        return state;
+    }????
+ 
+    public void setState(String state) {????
+        this.state = state;
+    }????
+ 
+    public boolean isInsurancePlan() {????
+        return insurancePlan;
+    }????
+ 
+    public void setInsurancePlan(boolean insurancePlan) {????
+        this.insurancePlan = insurancePlan;
+    }
+    
+}????
+    
+ 
+
+Physician.java
+
+package com.pack.SpringBootJPA.model;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+ 
+@Entity
+@Table(name="physician")
+public class Physician {????
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long physicianId;
+    private String physicianFirstName;
+    private String physicianLastName;
+    private String physiciandepartment;
+    private String qualification;
+    private int yearsofExperience;
+    private String state;
+    private boolean insurancePlan;
+    public Physician() {????
+        super();
+    }????
+    public Physician(String physicianFirstName, String physicianLastName, String physiciandepartment,
+            String qualification, int yearsofExperience, String state,Boolean insurancePlan) {????
+        super();
+        this.physicianFirstName = physicianFirstName;
+        this.physicianLastName = physicianLastName;
+        this.physiciandepartment = physiciandepartment;
+        this.qualification = qualification;
+        this.yearsofExperience = yearsofExperience;
+        this.state = state;
+        this.insurancePlan=insurancePlan;
+        
+    }????
+    public Long getPhysicianId() {????
+        return physicianId;
+    }????
+    public void setPhysicianId(Long physicianId) {????
+        this.physicianId = physicianId;
+    }????
+    public String getPhysicianFirstName() {????
+        return physicianFirstName;
+    }????
+    public void setPhysicianFirstName(String physicianFirstName) {????
+        this.physicianFirstName = physicianFirstName;
+    }????
+    public String getPhysicianLastName() {????
+        return physicianLastName;
+    }????
+    public void setPhysicianLastName(String physicianLastName) {????
+        this.physicianLastName = physicianLastName;
+    }????
+    public String getPhysiciandepartment() {????
+        return physiciandepartment;
+    }????
+    public void setPhysiciandepartment(String physiciandepartment) {????
+        this.physiciandepartment = physiciandepartment;
+    }????
+    public String getQualification() {????
+        return qualification;
+    }????
+    public void setQualification(String qualification) {????
+        this.qualification = qualification;
+    }????
+    public int getYearsofExperience() {????
+        return yearsofExperience;
+    }????
+    public void setYearsofExperience(int yearsofExperience) {????
+        this.yearsofExperience = yearsofExperience;
+    }????
+    public String getState() {????
+        return state;
+    }????
+    public void setState(String state) {????
+        this.state = state;
+    }????
+    public boolean isInsurancePlan() {????
+        return insurancePlan;
+    }????
+    public void setInsurancePlan(boolean insurancePlan) {????
+        this.insurancePlan = insurancePlan;
+    }????
+    @Override
+    public String toString() {????
+        return "Physician [physicianId=" + physicianId + ", physicianFirstName=" + physicianFirstName
+                + ", physicianLastName=" + physicianLastName + ", physiciandepartment=" + physiciandepartment
+                + ", qualification=" + qualification + ", yearsofExperience=" + yearsofExperience + ", state=" + state
+                + ", insurancePlan=" + insurancePlan + "]";
+    }????
+    
+ 
+}????
+
+PatientdiagnosisDetailss.java
+
+package com.pack.SpringBootJPA.model;
+ 
+import java.util.Date;
+ 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+ 
+@Entity
+@Table(name = "patientDiagnosisDetailss")
+public class PatientDiagnosis {?????
+private patient PatientId;  
+@Id
+@GeneratedValue(strategy = GenerationType.AUTO)
+private long diagnosisId;
+private String symptoms;
+private String diagnosisProvided;
+private String administeredBy;
+private Date dateOfDiagnosis;
+private String followUpRequired;
+private Date dateOfFollowUp;
+private int billAmount;
+private int cardNumber;
+private String modeOfPayment;
+ 
+
+public long getDiagnosisId() {?????
+return diagnosisId;
+}?????
+ 
+public void setDiagnosisId(long diagnosisId) {?????
+this.diagnosisId = diagnosisId;
+}?????
+ 
+public String getSymptoms() {?????
+return symptoms;
+}?????
+ 
+public void setSymptoms(String symptoms) {?????
+this.symptoms = symptoms;
+}?????
+ 
+public String getDiagnosisProvided() {?????
+return diagnosisProvided;
+}?????
+ 
+public void setDiagnosisProvided(String diagnosisProvided) {?????
+this.diagnosisProvided = diagnosisProvided;
+}?????
+ 
+public String getAdministeredBy() {?????
+return administeredBy;
+}?????
+ 
+public void setAdministeredBy(String administeredBy) {?????
+this.administeredBy = administeredBy;
+}?????
+ 
+public Date getDateOfDiagnosis() {?????
+return dateOfDiagnosis;
+}?????
+ 
+public void setDateOfDiagnosis(Date dateOfDiagnosis) {?????
+this.dateOfDiagnosis = dateOfDiagnosis;
+}?????
+ 
+public String getFollowUpRequired() {?????
+return followUpRequired;
+}?????
+ 
+public void setFollowUpRequired(String followUpRequired) {?????
+this.followUpRequired = followUpRequired;
+}?????
+ 
+public Date getDateOfFollowUp() {?????
+return dateOfFollowUp;
+}?????
+ 
+public void setDateOfFollowUp(Date dateOfFollowUp) {?????
+this.dateOfFollowUp = dateOfFollowUp;
+}?????
+ 
+public int getBillAmount() {?????
+return billAmount;
+}?????
+ 
+public void setBillAmount(int billAmount) {?????
+this.billAmount = billAmount;
+}?????
+ 
+public int getCardNumber() {?????
+return cardNumber;
+}?????
+ 
+public void setCardNumber(int cardNumber) {?????
+this.cardNumber = cardNumber;
+}?????
+ 
+public String getModeOfPayment() {?????
+return modeOfPayment;
+}?????
+ 
+public void setModeOfPayment(String modeOfPayment) {?????
+this.modeOfPayment = modeOfPayment;
+}?????
+ 
+public Patient getPatient() {?????
+return patient;
+}?????
+ 
+public void setPatient(Patient patient) {?????
+this.patient = patient;
+}?????
+ 
+@Override
+public String toString() {?????
+return "PatientDiagnosis [diagnosisId=" + diagnosisId + ", symptoms=" + symptoms + ", diagnosisProvided="
++ diagnosisProvided + ", administeredBy=" + administeredBy + ", dateOfDiagnosis=" + dateOfDiagnosis
++ ", followUpRequired=" + followUpRequired + ", dateOfFollowUp=" + dateOfFollowUp + ", billAmount="
++ billAmount + ", cardNumber=" + cardNumber + ", modeOfPayment=" + modeOfPayment + ", patient="
++ patient + "]";
+}?????
+ 
+public PatientDiagnosis(String symptoms, String diagnosisProvided, String administeredBy, Date dateOfDiagnosis,
+String followUpRequired, Date dateOfFollowUp, int billAmount, int cardNumber, String modeOfPayment,
+Patient patient) {?????
+super();
+this.symptoms = symptoms;
+this.diagnosisProvided = diagnosisProvided;
+this.administeredBy = administeredBy;
+this.dateOfDiagnosis = dateOfDiagnosis;
+this.followUpRequired = followUpRequired;
+this.dateOfFollowUp = dateOfFollowUp;
+this.billAmount = billAmount;
+this.cardNumber = cardNumber;
+this.modeOfPayment = modeOfPayment;
+this.patient = patient;
+}?????
+ 
+public PatientDiagnosis(long diagnosisId, String symptoms, String diagnosisProvided, String administeredBy,
+Date dateOfDiagnosis, String followUpRequired, Date dateOfFollowUp, int billAmount, int cardNumber,
+String modeOfPayment, Patient patient) {?????
+super();
+this.diagnosisId = diagnosisId;
+this.symptoms = symptoms;
+this.diagnosisProvided = diagnosisProvided;
+this.administeredBy = administeredBy;
+this.dateOfDiagnosis = dateOfDiagnosis;
+this.followUpRequired = followUpRequired;
+this.dateOfFollowUp = dateOfFollowUp;
+this.billAmount = billAmount;
+this.cardNumber = cardNumber;
+this.modeOfPayment = modeOfPayment;
+this.patient = patient;
+}?????
+ 
+public PatientDiagnosis() {?????
+super();
+// TODO Auto-generated constructor stub
+}?????
+ 
+}?????
+ 
+
+EnrollPatientRepository.java
+
+package com.pack.SpringBootJPA.dao;
+
+import java.util.List;
+
+import org.springframework.data.repository.CrudRepository;
+
+import com.pack.SpringBootJPA.model.EnrollPatient;
+import com.pack.SpringBootJPA.model.Physician;
+
+public interface EnrollPatientRepository extends CrudRepository<EnrollPatient,Long> {????
+
+}
+PhysicianRepository.java
+
+package com.pack.SpringBootJPA.dao;
+
+
+
+import java.util.List;
+ 
+import org.springframework.data.repository.CrudRepository;
+ 
+import com.pack.SpringBootJPA.model.Physician;
+ 
+public interface PhysicianRepository extends CrudRepository<Physician,Long>{????
+ 
+    List<Physician> findByphysiciandepartment(String physiciandepartment);
+ 
+    List<Physician> findBystate(String state);
+ 
+}
+
+Enroll
+
+Controller.java
+
+package com.pack.SpringBootJPA.controller;
+ 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.Random;
+ 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+ 
+//import com.pack.HospitalManagement.dao.AdminRepository;
+import com.pack.HospitalManagement.dao.EnrollPatientRepository;
+import com.pack.HospitalManagement.dao.PatientDiagnosisRepository;
+import com.pack.HospitalManagement.dao.PhysicianRepository;
+//import com.pack.HospitalManagement.model.Admin;
+import com.pack.HospitalManagement.model.EnrollPatient;
+import com.pack.HospitalManagement.model.PatientDiagnosis;
+import com.pack.HospitalManagement.model.Physician;
+ 
+@CrossOrigin(origins = "http://localhost:4200")
+@RestController
+@RequestMapping("/api")
+public class EnrollPatientController {????
+    @Autowired
+    EnrollPatientRepository repository;
+    @Autowired
+    PhysicianRepository physicianRepository;
+    @Autowired
+    PatientDiagnosisRepository diagnosisRepository;
+    //@Autowired
+    //AdminRepository adminRepository;
+ 
+    @PostMapping(value = "/patients")
+    public ResponseEntity<EnrollPatient> postEnrollPatient(@RequestBody EnrollPatient enrollPatient) {????
+        try {????
+            System.out.println("hii" + enrollPatient.isInsurancePlan());
+            EnrollPatient _patient = repository.save(new EnrollPatient(enrollPatient.getFirstName(),
+                    enrollPatient.getLastName(), enrollPatient.getPassword(), enrollPatient.getDob(),
+                    enrollPatient.getEmail(), enrollPatient.getContactNumber(), enrollPatient.getState(),
+                    enrollPatient.isInsurancePlan()));
+            return new ResponseEntity<>(_patient, HttpStatus.CREATED);
+        }???? catch (Exception e) {????
+            return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
+        }????
+ 
+    }????
+    
+     
+    @PostMapping(value = "/patientsDiagnosis")
+        public ResponseEntity<PatientDiagnosis> postCustomer(@RequestBody PatientDiagnosis patientDiagnosis) {????
+         try {????
+                System.out.println(patientDiagnosis.getPatientId());
+                PatientDiagnosis _patientDiagnosis = diagnosisRepository
+                        .save(new PatientDiagnosis(patientDiagnosis.getPatientId(),patientDiagnosis.getSymptoms(), patientDiagnosis.getDiagnosisProvided(),
+                                patientDiagnosis.getPhysicianId(), patientDiagnosis.getDateOfDiagnosis(),
+                                patientDiagnosis.getFollowup(), patientDiagnosis.getFollowUpDate(),
+                                patientDiagnosis.getBillAmount(), patientDiagnosis.getCardNumber(),
+                                patientDiagnosis.getPaymentMode()));
+                return new ResponseEntity<>(_patientDiagnosis, HttpStatus.CREATED);
+            }???? catch (Exception e) {????
+                return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
+            }????
+        }????
+                        
+    @PostMapping(value = "/physicians")
+    public ResponseEntity<Physician> postPhysician(@RequestBody Physician physician) {????
+        try {????
+            System.out.println("hii");
+            System.out.println(physician);
+            /*
+             * Random random = new Random(); int phyid = random.nextInt(899) + 100; String
+             * pid = "PR" + phyid; physician.setPhysicianId(pid);
+             */
+            Physician _physician = physicianRepository.save(new Physician(physician.getPhysicianFirstName(),
+                    physician.getPhysicianLastName(), physician.getPhysiciandepartment(), physician.getQualification(),
+                    physician.getYearsofExperience(), physician.getState(), physician.isInsurancePlan()));
+            return new ResponseEntity<>(_physician, HttpStatus.CREATED);
+        }???? catch (Exception e) {????
+            return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
+        }????
+ 
+    }????
+ 
+    @GetMapping("/patients")
+    public ResponseEntity<List<EnrollPatient>> getAllPatients() {????
+        List<EnrollPatient> patients = new ArrayList<EnrollPatient>();
+        try {????
+            System.out.println(patients);
+            repository.findAll().forEach(patients::add);
+            System.out.println(patients);
+            if (patients.isEmpty()) {????
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }????
+            return new ResponseEntity<>(patients, HttpStatus.OK);
+        }???? catch (Exception e) {????
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }????
+ 
+    }????
+ 
+    @GetMapping("/physicians")
+    public ResponseEntity<List<Physician>> getAllPhysicians() {????
+        List<Physician> physicians = new ArrayList<Physician>();
+        try {????
+            System.out.println(physicians);
+            physicianRepository.findAll().forEach(physicians::add);
+ 
+            if (physicians.isEmpty()) {????
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }????
+            return new ResponseEntity<>(physicians, HttpStatus.OK);
+        }???? catch (Exception e) {????
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }????
+ 
+    }????
+ 
+    /*
+     * @PutMapping(value = "/patients/update") public EnrollPatient
+     * updatePatient(@RequestBody EnrollPatient patient) {????
+     * System.out.println("Into update"); System.out.println("into update" +
+     * patient.getId() + " " + patient.getName()); EnrollPatient patient1 =
+     * repository .save(new EnrollPatient(patient.getId(), patient.getFirstName(),
+     * customer.getAge(), customer.getGender())); return customer1; }????
+     */
+    @GetMapping("/patients/{????id}????")
+    public ResponseEntity<EnrollPatient> getCustomerById(@PathVariable("id") long id) {????
+        Optional<EnrollPatient> patientData = repository.findById(id);
+ 
+        if (patientData.isPresent()) {????
+            return new ResponseEntity<>(patientData.get(), HttpStatus.OK);
+        }???? else {????
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }????
+    }????
+ 
+    @DeleteMapping("/patients/{????id}????")
+    public ResponseEntity<HttpStatus> deleteCustomer(@PathVariable("id") long id) {????
+        try {????
+            repository.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }???? catch (Exception e) {????
+            return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+        }????
+    }????
+ 
+    @GetMapping(value = "physicians/physiciandepartment/{????physiciandepartment}????")
+    public ResponseEntity<List<Physician>> findByphysiciandepartment(@PathVariable String physiciandepartment) {????
+        try {????
+            List<Physician> physicians = physicianRepository.findByphysiciandepartment(physiciandepartment);
+ 
+            if (physicians.isEmpty()) {????
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }????
+            return new ResponseEntity<>(physicians, HttpStatus.OK);
+        }???? catch (Exception e) {????
+            return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+        }????
+    }????
+ 
+    @GetMapping(value = "physicians/state/{????state}????")
+    public ResponseEntity<List<Physician>> findBystate(@PathVariable String state) {????
+        try {????
+            List<Physician> physicians = physicianRepository.findBystate(state);
+ 
+            if (physicians.isEmpty()) {????
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }????
+            return new ResponseEntity<>(physicians, HttpStatus.OK);
+        }???? catch (Exception e) {????
+            return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+        }????
+    }????
+    /*@GetMapping(value = "/admin")
+    public ResponseEntity<Admin> postAdmin(@RequestBody Admin admin) {????
+     try {????
+           
+            Admin _admin = adminRepository
+                    .save(new Admin(admin.getUserName(),admin.getPassword()));
+            return new ResponseEntity<>(_admin, HttpStatus.CREATED);
+        }???? catch (Exception e) {????
+            return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
+        }????
+    }????*/
+}????
+ 

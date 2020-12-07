@@ -1,0 +1,115 @@
+app.routing.module.ts
+
+{????? path : 'add' , component : EnrollPatientComponent }?????,
+  {????? path :' physicianDetails' , component : AddPhysicianComponent }?????,
+  {????? path : 'patientsList' , component : PatientHistoryComponent }?????,
+  
+  {????? path : 'patientsDiagnosis' , component : PatientDiagnosisComponent }?????,
+  {????? path : 'Isearch' , component : SearchPhysicianComponent }?????,
+
+
+app.comp.ts
+
+import  {?????  Component ,  OnInit  }?????  from   '@angular/core' ;
+import  {?????  Physician  }?????  from   '../physician' ;
+import  {?????  PatientService  }?????  from   '../patient.service' ;
+import  {?????  Router  }?????  from   '@angular/router' ;
+ 
+@ Component ({?????
+   selector :   'app-search-physician' ,
+   templateUrl :   './search-physician.component.html' ,
+   styleUrls :  [ './search-physician.component.css' ]
+}?????)
+export   class   SearchPhysicianComponent   implements   OnInit  {?????
+   physiciandepartment :  String ;
+   state :  String ;
+   physicians :  Physician [];
+   constructor ( private   patientService : PatientService , private   router : Router ) {????? }?????
+ 
+   ngOnInit ():  void  {?????
+     this . physiciandepartment  =  null ;
+     this . state = null ;
+    
+  }?????
+    private   searchPhysicians () {?????
+     this . physicians  = [];
+     this . patientService . getByphysiciandepartment ( this . physiciandepartment )
+      . subscribe ( physicians   =>   this . physicians  =  physicians );
+  }?????
+   private   searchByState (){?????
+     this . physicians  = [];
+     this . patientService . getByState ( this . state )
+      . subscribe ( physicians   =>   this . physicians  =  physicians );
+  }?????
+   onSubmit () {?????
+     this . searchPhysicians ();
+     this . searchByState ();
+     
+  }?????
+}
+
+app.comp.html
+
+< div   Style = "text-align:center"   class = "container" >
+     < a   routerLink = "add"   class = "btn btn-primary active"   role = "button"   routerLinkActive = "active" > AddPatients </ a >
+     < a   routerLink = "physicianDetails"   class = "btn btn-primary active"   role = "button"   routerLinkActive = "active" > AddPhysicians </ a >
+     < a   routerLink = "patientsDiagnosis"   class = "btn btn-primary active"   role = "button"   routerLinkActive = "active" > AddPatientDiagnosis </ a >
+     < a   routerLink = "search"   class = "btn btn-primary active"   role = "button"   routerLinkActive = "active" > SearchPhysicians </ a >  
+     < a   routerLink = "patientsList"   class = "btn btn-primary active"   role = "button"   routerLinkActive = "active" > PatientsList </ a >
+ 
+</ div >
+
+< h3   >  Physician Search </ h3 >
+< div   class = "center" >
+< div   style = " width: 300px; " >
+   < form   (ngSubmit) = "onSubmit()"   >
+     < div   class = "form-group" >
+       < label   for = "physiciandepartment" > PhysicianDepartment </ label >
+       < input   type = "text"   class = "form-control"   id = "physiciandepartment"   required   [(ngModel)] = "physiciandepartment"   name = "physiciandepartment" >
+     </ div >
+     < div   class = "btn-group" >
+       < button   type = "submit"   class = "btn btn-success" > Submit </ button >
+       < button   type = "Reset"   class = "btn btn-secondary" > Reset </ button >
+     </ div >
+     < div   class = "form-group" >
+       < label   for = "state" > PhysicianState </ label >
+       < input   type = "text"   class = "form-control"   id = "state"   required   [(ngModel)] = "state"   name = "state" >
+     </ div >
+     < div   class = "btn-group" >
+       < button   type = "submit"   class = "btn btn-success" > Submit </ button >
+       < button   type = "Reset"   class = "btn btn-secondary" > Reset </ button >
+     </ div >
+   </ form >
+</ div >
+</ div >
+< br />
+ 
+< div >
+     < table   class = "table table-striped" >
+         < thead >
+             < tr >
+               < th > Physician Id </ th >
+               < th > Physician FirstName </ th >
+               < th > Physician LastName </ th >
+               < th > physiciandepartment </ th >
+               < th > Qualification </ th >
+               < th > Experience </ th >
+               < th > State </ th >
+               < th > InsurancePlan </ th >
+             </ tr >
+           </ thead >
+     < tbody >
+       < tr   *ngFor = "let physician of physicians" >
+         < td > {?????{?????physician.physicianId}?????}????? </ td >
+         < td > {?????{?????physician.physicianFirstName}?????}????? </ td >
+         < td > {?????{?????physician.physicianLastName}?????}????? </ td >
+         < td > {?????{?????physician.physiciandepartment}?????}????? </ td >
+         < td > {?????{?????physician.qualification}?????}????? </ td >
+         < td > {?????{?????physician.yearsofExperience}?????}????? </ td >
+         < td > {?????{?????physician.state}?????}????? </ td >
+         < td > {?????{?????physician.insurancePlan}?????}????? </ td >
+       </ tr >
+     </ tbody >
+     </ table >
+     </ div >
+

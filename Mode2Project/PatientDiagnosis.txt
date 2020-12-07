@@ -1,0 +1,128 @@
+PatientDiagnosis.html
+
+< h3 > Patient Diagnosis Details  </ h3 >
+< div [hidden] = "submitted" style = " width: 300px; " >
+< form (ngSubmit) = "onSubmit()" #diagnosisform = "ngForm" >
+< div class = "dropdown ml-auto" >
+< select class = "btn btn-secondary dropdown-toggle" >
+< option value = "default" > Select Patient Id </ option >
+< option *ngFor = "let patient of patients | async" [value] = "patient.id" > {??????{?????????????patient.id}?????????????}?????????????????? </ option >
+</ select >
+</ div >
+< div class = "form-group" >
+< label for = "symptoms" > Symptoms </ label >
+< input type = "text" class = "form-control" id = "symptoms" required [(ngModel)] = "patientDiagnosis.symptoms" name = "symptoms" #symptoms = "ngModel" [class.is-invalid] = "symptoms.invalid && symptoms.touched" >
+< small class = "text-danger" [class.d-none] = "symptoms.valid || symptoms.untouched" > symptoms is required </ small >
+</ div >
+ 
+< div class = "form-group" >
+< label for = "diagnosisProvided" > Diagnosis Provided </ label >
+< input type = "text" class = "form-control" id = "diagnosisProvided" required [(ngModel)] = "patientDiagnosis.diagnosisProvided" name = "diagnosisProvided" #diagnosisProvided = "ngModel" [class.is-invalid] = "diagnosisProvided.invalid && diagnosisProvided.touched" >
+< small class = "text-danger" [class.d-none] = "diagnosisProvided.valid || diagnosisProvided.untouched" > Diagnosis Provided  is required </ small >
+</ div >
+< div class = "form-group" >
+< label for = "administeredBy" > Administered By </ label >
+< input type = "text" class = "form-control" id = "administeredBy" required [(ngModel)] = "patientDiagnosis.administeredBy" name = "administeredBy" #administeredBy = "ngModel" [class.is-invalid] = "administeredBy.invalid && administeredBy.touched" >
+< small class = "text-danger" [class.d-none] = "administeredBy.valid || administeredBy.untouched" > Administered By is required </ small >
+</ div >
+< div class = "form-group" >
+< label for = "dateOfDiagnosis" > Date Of Diagnosis </ label >
+< input type = "date" class = "form-control" id = "dateOfDiagnosis" required [(ngModel)] = "patientDiagnosis.dateOfDiagnosis" name = "dateOfDiagnosis" #dateOfDiagnosis = "ngModel" [class.is-invalid] = "dateOfDiagnosis.invalid && dateOfDiagnosis.touched" >
+< small class = "text-danger" [class.d-none] = "dateOfDiagnosis.valid || dateOfDiagnosis.untouched" > dateOfDiagnosis is required </ small >
+</ div >
+ 
+< div class = "form-group" >
+< label > Follow Up </ label >
+< div class = "form-check" >
+< input class = "form-check-input" type = "radio" name = "followUpRequired" value = "YES" [(ngModel)] = "patientDiagnosis.followUpRequired" #followUpRequired = "ngModel" required >
+< label class = "form-check-label" > Yes </ label >
+</ div >
+ 
+< div class = "form-check" >
+< input class = "form-check-input" type = "radio" name = "followUpRequired" value = "NO" [(ngModel)] = "patientDiagnosis.followUpRequired" #followUpRequired = "ngModel" required >
+< label class = "form-check-label" > No </ label >
+</ div >
+ 
+< div *ngIf = "followUpRequired.invalid && followUpRequired.untouched" class = "text-danger" >
+              Follow Up is required
+</ div >
+</ div >
+
+< div class = "form-group" >
+< label > Date Of FollowUp </ label >
+< input type = "date" class = "form-control" id = "dateOfFollowUp" required [(ngModel)] = "patientDiagnosis.dateOfFollowUp" name = "dateOfFollowUp" #dateOfFollowUp = "ngModel" [class.is-invalid] = "dateOfFollowUp.invalid && dateOfFollowUp.touched" >
+< small class = "text-danger" [class.d-none] = "dateOfFollowUp.valid || dateOfFollowUp.untouched" > Date Of FollowUp is required </ small >
+</ div >
+< div class = "form-group" >
+< label for = "billAmount" > Bill Amount </ label >
+< input type = "number" class = "form-control" id = "billAmount" required [(ngModel)] = "patientDiagnosis.billAmount" name = "billAmount" #billAmount = "ngModel" [class.is-invalid] = "billAmount.invalid && billAmount.touched" >
+< small class = "text-danger" [class.d-none] = "billAmount.valid || billAmount.untouched" > Bill Amount is required </ small >
+</ div >
+< div class = "form-group" >
+< label for = "cardNumber" > Card Number </ label >
+< input type = "number" class = "form-control" id = "cardNumber" required [(ngModel)] = "patientDiagnosis.cardNumber" name = "cardNumber" #cardNumber = "ngModel" [class.is-invalid] = "cardNumber.invalid && cardNumber.touched" >
+< small class = "text-danger" [class.d-none] = "cardNumber.valid || cardNumber.untouched" > Card Number is required  </ small >
+</ div >
+ 
+< div class = "form-group" >
+< label for = "modeOfPayment" > Mode Of Payment </ label >
+< input type = "text" class = "form-control" id = "modeOfPayment" required [(ngModel)] = "patientDiagnosis.modeOfPayment" name = "modeOfPayment" #modeOfPayment = "ngModel" [class.is-invalid] = "modeOfPayment.invalid && modeOfPayment.touched" >
+< small class = "text-danger" [class.d-none] = "modeOfPayment.valid || modeOfPayment.untouched" > Mode Of Payment is required  </ small >
+</ div >
+ 
+< button type = "submit" class = "btn btn-success" [disabled] = "diagnosisform.form.invalid" > Save Details </ button >
+</ form >
+</ div >
+ 
+< div [hidden] = "!submitted" >
+< h4 > You submitted successfully! </ h4 >
+< button class = "btn btn-success" (click) = "newPatientDiagnosis()" > New Patient Diagnosis </ button >
+</ div >
+
+
+PatientDiagnosis.ts
+
+
+import {????? Component , OnInit }????? from '@angular/core' ;
+import {????? Observable }????? from 'rxjs' ;
+import {????? Patient }????? from '../patient' ;
+import {????? PatientDiagnosisService }????? from '../patient-diagnosis.service' ;
+import {????? PatientService }????? from '../patient.service' ;
+import {????? PatientDiagnosis }????? from '../patientDiagnosis ' ;
+@ Component ({?????
+selector : 'app-create-patient-diagnosis' ,
+templateUrl : './create-patient-diagnosis.component.html' ,
+styleUrls : [ './create-patient-diagnosis.component.css' ]
+}?????)
+export class CreatePatientDiagnosisComponent implements OnInit {?????
+patientDiagnosis : PatientDiagnosis = new PatientDiagnosis ();
+submitted = false ;
+patients : Observable < Patient []>;
+constructor ( private patientDiagnosisService : PatientDiagnosisService , private patientService : PatientService ) {????? }?????
+ngOnInit (): void {?????
+this . reloadData ();
+}?????
+reloadData (){?????
+this . patients = this . patientService . getPatientsList ();
+console . log ( this . patients );
+}?????
+newPatientDiagnosis (): void {?????
+this . submitted = false ;
+this . patientDiagnosis = new PatientDiagnosis ();
+}?????
+onSubmit (){?????
+this . save ();
+}?????
+save (){?????
+this . patientDiagnosisService . createPatientDiagnosis ( this . patientDiagnosis )
+. subscribe (
+data => {?????
+console . log ( data );
+this . submitted = true ;
+}?????,
+error => console . log ( error ));
+this . patientDiagnosis = new PatientDiagnosis ();
+ 
+}?????
+ 
+}?????

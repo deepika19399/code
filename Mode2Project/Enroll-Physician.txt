@@ -1,0 +1,98 @@
+Enroll_Physician.html
+
+< h3 > Enroll Physician </ h3 >
+< div   [hidden] = "submitted"   style = " width: 300px; " >
+     < form   (ngSubmit) = "onSubmit()"   #physicianform = "ngForm" >
+         < div   class = "form-group" >
+             < label   for = "firstName" > First Name </ label >
+             < input   type = "text"   class = "form-control"   id = "firstName"   required   [(ngModel)] = "physician.firstName"   name = "firstName"   #firstName = "ngModel"   [class.is-invalid] = "firstName.invalid && firstName.touched" >
+             < small   class = "text-danger"   [class.d-none] = "firstName.valid || firstName.untouched" > First Name is required </ small >            
+         </ div >
+         < div   class = "form-group" >  
+             < label   for = "lastName" > Last Name </ label >
+             < input   type = "text"   class = "form-control"   id = "lastName"   required   [(ngModel)] = "physician.lastName"   name = "lastName"   #lastName = "ngModel"   [class.is-invalid] = "lastName.invalid && lastName.touched" >
+             < small   class = "text-danger"   [class.d-none] = "lastName.valid || lastName.untouched" > Last Name is required </ small >
+         </ div >
+ 
+         < div   class = "form-group" >
+             < label   for = "educationalQualification" > Educational Qualification </ label >
+             < input   type = "text"   class = "form-control"   id = "educationalQualification"   required   [(ngModel)] = "physician.educationalQualification"   name = "educationalQualification"   #educationalQualification = "ngModel"   [class.is-invalid] = "educationalQualification.invalid && educationalQualification.touched" >
+             < small   class = "text-danger"   [class.d-none] = "educationalQualification.valid || educationalQualification.untouched" > Educational Qualification is required </ small >
+         </ div >
+        
+         < div   class = "form-group" >
+             < label   for = "department" > Department </ label >
+             < input   type = "text"   class = "form-control"   id = "department"   required   [(ngModel)] = "physician.department"   name = "department"   #department = "ngModel"   [class.is-invalid] = "department.invalid && department.touched" >
+             < small   class = "text-danger"   [class.d-none] = "department.valid || department.untouched" > Department is required </ small >
+         </ div >
+ 
+         < div   class = "form-group" >
+             < label   for = "experience" > Years of Experience </ label >
+             < input   type = "text"   class = "form-control"   id = "experience"   required   [(ngModel)] = "physician.experience"   name = "experience"   #experience = "ngModel"   [class.is-invalid] = "experience.invalid && experience.touched" >
+             < small   class = "text-danger"   [class.d-none] = "experience.valid || experience.untouched" > Experience is required </ small >
+         </ div >
+ 
+         < div   class = "form-group" >
+             < label   for = "state" > State </ label >
+             < input   type = "text"   class = "form-control"   id = "state"   required   [(ngModel)] = "physician.state"   name = "state"   #state = "ngModel"   [class.is-invalid] = "state.invalid && state.touched" >
+             < small   class = "text-danger"   [class.d-none] = "state.valid || state.untouched" > State is required </ small >
+         </ div >
+    
+         < div   class = "form-group" >
+             < label   for = "insurancePlan" > Insurance Plan </ label >
+             < input   type = "text"   class = "form-control"   id = "insurancePlan"   required   [(ngModel)] = "physician.insurancePlan"   name = "insurancePlan"   #insurancePlan = "ngModel"   [class.is-invalid] = "insurancePlan.invalid && insurancePlan.touched" >
+             < small   class = "text-danger"   [class.d-none] = "insurancePlan.valid || insurancePlan.untouched" > insurancePlan is required  </ small >
+         </ div >
+ 
+     < button   type = "submit"   class = "btn btn-success"   [disabled] = "physicianform.form.invalid" > Register </ button >
+   </ form >
+</ div >
+ 
+   < div   [hidden] = "!submitted" >
+     < h4 > You submitted successfully! </ h4 >
+     < button   class = "btn btn-success"   (click) = "newPhysician()" > Add Physician </ button >
+   </ div >
+
+Enroll-Physician.ts
+
+import  {?????  Component ,  OnInit  }?????  from   '@angular/core' ;
+import  {?????  Physician  }?????  from   '../Physician' ;
+import  {?????  PhysicianService  }?????  from   '../physician.service' ;
+ 
+@ Component ({?????
+   selector :   'app-enroll-physician' ,
+   templateUrl :   './enroll-physician.component.html' ,
+   styleUrls :  [ './enroll-physician.component.css' ]
+}?????)
+export   class   EnrollPhysicianComponent   implements   OnInit  {?????
+ 
+ 
+   physician :  Physician  =  new   Physician ();
+   submitted  =  false ;
+ 
+   constructor ( private   physicianService :  PhysicianService ) {????? }?????
+ 
+   ngOnInit ():  void  {?????
+  }?????
+ 
+   newPhysician ():  void {?????
+     this . submitted  =  false ;
+     this . physician  =  new   Physician ();
+  }?????
+ 
+   onSubmit (){?????
+     this . save ();
+  }?????
+ 
+   save (){?????
+     this . physicianService . enrollPhysician ( this . physician )
+    . subscribe (
+       data =>  {?????
+         console . log ( data );
+         this . submitted  =  true ;
+      }?????,
+       error   =>   console . log ( error ));
+       this . physician  =  new   Physician ();
+  }?????
+ 
+}?????
